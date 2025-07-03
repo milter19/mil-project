@@ -49,6 +49,50 @@ body {
   box-shadow: 0 0 10px #00ffc690;
 }
 
+.navbar ul {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  transition: all 0.2s;
+}
+
+/* MOBILE STACKED NAVBAR */
+@media (max-width: 700px) {
+  .navbar ul {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    background: #181e27ee;
+    border-radius: 1em;
+    padding: 18px 0;
+    box-shadow: 0 4px 16px #0003;
+    width: 96vw;
+    margin: 0 auto;
+  }
+  .navbar ul li {
+    width: 90vw;
+    text-align: center;
+    border-bottom: 1px solid #232f4055;
+    padding: 8px 0;
+  }
+  .navbar ul li:last-child {
+    border-bottom: none;
+  }
+  .navbar ul li a {
+    font-size: 1.12em;
+    letter-spacing: 0.03em;
+    padding: 12px 0;
+    display: block;
+  }
+}
+
+
+
+
 /* HERO */
 .hero {
   width: 100%;
