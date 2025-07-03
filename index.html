@@ -8,26 +8,83 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="loader.css">
 </head>
+<style>
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      z-index: 101;
+      padding: 8px 16px;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+    .hamburger:hover {
+      background: #00ffc6cc;
+      color: #1d1931;
+    }
+    @media (max-width: 650px) {
+      .navbar {
+        flex-wrap: wrap;
+        padding: 18px 0 0 0;
+      }
+      .logo {
+        z-index: 102;
+      }
+      .navbar ul {
+        display: none !important;
+        flex-direction: column;
+        position: absolute;
+        top: 62px;
+        right: 8px;
+        width: 70vw;
+        background: #181c22f9;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px #00ffc633;
+        gap: 0;
+        padding: 14px 0;
+        z-index: 100;
+      }
+      .navbar ul.show {
+        display: flex !important;
+      }
+      .navbar ul li {
+        margin: 0 0 10px 0;
+        text-align: right;
+        width: 100%;
+      }
+      .navbar ul li a {
+        display: block;
+        width: 100%;
+        padding: 12px 30px;
+        font-size: 1.1rem;
+      }
+      .hamburger {
+        display: block !important;
+        margin-left: auto;
+      }
+    }
+  </style>
+</head>
 <body>
 <!-- LOADER (top of body, before content) -->
   <div id="loaderBg">
     <div id="aetherType"></div>
   </div>
 
-  <!-- NAVBAR + HERO -->
-  <div class="hero">
-    <nav class="navbar">
-      <div class="logo">AETHER</div>
-      <div class="hamburger" id="hamburger-menu">
-        <i class="fa fa-bars"></i>
-      </div>
-      <ul>
-        <li><a href="aboutme.html">About Me</a></li>
-        <li><a href="gamingjourney.html">Gaming Journey</a></li>
-        <li><a href="project.html">Projects</a></li>
-        <li><a href="#contact" class="contact-btn">Contact Info</a></li>
-      </ul>
-    </nav>
+  <nav class="navbar">
+    <div class="logo">AETHER</div>
+    <div class="hamburger" id="hamburger-menu">
+      <i class="fa fa-bars"></i>
+    </div>
+    <ul>
+      <li><a href="aboutme.html">About Me</a></li>
+      <li><a href="gamingjourney.html">Gaming Journey</a></li>
+      <li><a href="project.html">Projects</a></li>
+      <li><a href="#contact" class="contact-btn">Contact Info</a></li>
+    </ul>
+  </nav>
+
 
     <div class="hero-content">
       <div class="hero-pic-glow">
@@ -175,18 +232,17 @@
       });
     });
   </script>
-  <script>
-    // Hamburger menu logic
-    const hamburger = document.getElementById('hamburger-menu');
-    const navLinks = document.querySelector('.navbar ul');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-    });
-
-    // Optional: Hide menu on link click (for better mobile UX)
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('show');
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger-menu');
+      const navLinks = document.querySelector('.navbar ul');
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('show');
+        });
       });
     });
   </script>
