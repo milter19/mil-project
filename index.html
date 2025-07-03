@@ -18,6 +18,9 @@
   <div class="hero">
     <nav class="navbar">
       <div class="logo">AETHER</div>
+      <div class="hamburger" id="hamburger-menu">
+        <i class="fa fa-bars"></i>
+      </div>
       <ul>
         <li><a href="aboutme.html">About Me</a></li>
         <li><a href="gamingjourney.html">Gaming Journey</a></li>
@@ -25,6 +28,7 @@
         <li><a href="#contact" class="contact-btn">Contact Info</a></li>
       </ul>
     </nav>
+
     <div class="hero-content">
       <div class="hero-pic-glow">
         <img src="people1.png" alt="Mil Profile Picture" class="hero-pic">
@@ -168,6 +172,21 @@
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+      });
+    });
+  </script>
+  <script>
+    // Hamburger menu logic
+    const hamburger = document.getElementById('hamburger-menu');
+    const navLinks = document.querySelector('.navbar ul');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
+    // Optional: Hide menu on link click (for better mobile UX)
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
       });
     });
   </script>
