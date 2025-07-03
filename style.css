@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
 }
 
-/* NAVBAR */
+/* ========== DESKTOP NAVBAR (default styles) ========== */
 .navbar {
   width: 90%;
   margin: 0 auto;
@@ -31,6 +31,15 @@ body {
   display: flex;
   gap: 36px;
   list-style: none;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0;
+  margin: 0;
+  flex-wrap: nowrap;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
 }
 .navbar ul li a {
   text-decoration: none;
@@ -49,22 +58,7 @@ body {
   box-shadow: 0 0 10px #00ffc690;
 }
 
-/* Default desktop - no change needed */
-.navbar ul {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-  transition: all 0.2s;
-  overflow: visible;
-  width: auto;
-  flex-wrap: nowrap;
-}
-
-/* Scrollable navbar on mobile */
+/* ========== MOBILE SCROLLABLE NAVBAR ========== */
 @media (max-width: 700px) {
   .navbar ul {
     display: flex;
@@ -72,10 +66,10 @@ body {
     overflow-x: auto;
     white-space: nowrap;
     width: 98vw;
-    gap: 8px;
+    gap: 10px;
     background: #181e27ee;
     border-radius: 0.8em;
-    padding: 10px 0 10px 8px;
+    padding: 10px 0 10px 16px; /* left padding para di dikit sa edge */
     box-shadow: 0 4px 16px #0003;
     scrollbar-width: thin;
     scrollbar-color: #232f40 #232f4000;
@@ -97,7 +91,7 @@ body {
   .navbar ul li a:active, .navbar ul li a:focus {
     background: #232f4055;
   }
-  /* Optional: Hide ugly scrollbars on Webkit browsers */
+  /* Hide ugly scrollbars on Webkit browsers (optional) */
   .navbar ul::-webkit-scrollbar {
     height: 6px;
     background: transparent;
@@ -107,6 +101,7 @@ body {
     border-radius: 3px;
   }
 }
+
 
 
 
