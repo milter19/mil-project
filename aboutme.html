@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Meet Mil | About</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="loader.css">
+
+  <style>
+    :root {
+      --main-bg: #141922;
+      --card-bg: #1c2230;
+      --accent: #00ffc6;
+      --accent2: #34c9ef;
+      --modal-bg: #0a0e14f2;
+      --border-radius: 18px;
+      --shadow: 0 6px 40px #00ffc61a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; background: var(--main-bg); color: #eafaf9; font-family: 'Montserrat', 'Segoe UI', sans-serif; }
+    body { padding-bottom: 40px; }
+
+    .back-button-top {
+      position: fixed;
+      top: 22px; left: 28px; z-index: 22;
+      background: var(--main-bg);
+      border-radius: 50%;
+      box-shadow: 0 2px 18px #00ffc61a;
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      transition: box-shadow 0.22s;
+    }
+    .back-button-top:hover {
+      box-shadow: 0 2px 28px #00ffc650;
+    }
+    .back-button-top img {
+      width: 33px; height: 33px; display: block;
+      filter: drop-shadow(0 0 4px #00ffc6b9);
+      transition: transform 0.22s;
+    }
+    .back-button-top:hover img { transform: scale(1.09); }
+
+    .about-hero {
+      width: 100vw;
+      min-height: 58vh;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, #1a283e 50%, #202a34b6 100%), url('elek.gif');
+      background-size: cover;
+      background-position: center;
+      padding: 56px 6vw 56px 6vw;
+      gap: 30px;
+      position: relative;
+    }
+    .about-photo {
+      flex: 1 1 320px;
+      display: flex; justify-content: center; align-items: center;
+      min-width: 240px; margin-bottom: 12px;
+    }
+    .about-photo img {
+      width: 240px; height: 240px; object-fit: cover;
+      border-radius: 50%; border: 5px solid var(--accent);
+      box-shadow: 0 0 32px var(--accent), 0 0 0 10px #222c;
+      background: #202b2e;
+      animation: pulse-glow 2.1s infinite alternate;
+    }
+    @keyframes pulse-glow {
+      from { box-shadow: 0 0 18px var(--accent), 0 0 0 10px #222c;}
+      to { box-shadow: 0 0 38px var(--accent), 0 0 0 10px #181f;}
+    }
+    .about-text {
+      flex: 2 1 420px; min-width: 240px;
+      display: flex; flex-direction: column; justify-content: center;
+      margin-left: 40px;
+    }
+    .about-text h1 {
+      font-size: 2.9rem; color: var(--accent); font-weight: 900;
+      margin-bottom: 16px; letter-spacing: 2px;
+    }
+    .about-text p {
+      font-size: 1.13rem; color: #eafaf9; margin-bottom: 28px;
+      max-width: 600px; font-weight: 500; letter-spacing: 0.2px;
+    }
+    .glow-btn {
+      width: 210px; padding: 13px 0;
+      border-radius: 25px; border: 2px solid var(--accent);
+      background: transparent; color: #fff; font-weight: bold;
+      font-size: 1.12rem;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: color 0.18s, border 0.25s;
+      text-align: center; text-decoration: none; display: inline-block;
+    }
+    .glow-btn span {
+      background: var(--accent);
+      height: 100%; width: 0%;
+      border-radius: 25px;
+      position: absolute; left: 0; bottom: 0; z-index: -1;
+      transition: 0.5s;
+    }
+    .glow-btn:hover span { width: 100%; }
+    .glow-btn:hover { color: #191f22; border: 2px solid var(--accent); }
+
+    /* CARDS */
+    .about-cards {
+      width: 100%;
+      background: var(--main-bg);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      justify-content: center;
+      padding: 56px 3vw 20px 3vw;
+    }
+    .card {
+      flex: 1 1 320px;
+      max-width: 360px;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 40px 24px 34px 24px;
+      margin: 12px 5px;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.2s;
+      min-width: 270px;
+      border: 2.2px solid transparent;
+    }
+    .card:hover, .card:focus {
+      transform: translateY(-7px) scale(1.04);
+      box-shadow: 0 6px 54px #00ffc63f;
+      border: 2.2px solid var(--accent2);
+      z-index: 3;
+    }
+    .card img {
+      width: 63px; height: 63px; margin-bottom: 16px; opacity: 0.92;
+      filter: drop-shadow(0 1px 12px #00ffc626);
+    }
+    .card h3 {
+      font-size: 1.36rem; font-weight: 900;
+      color: var(--accent); margin-bottom: 13px;
+      letter-spacing: 0.7px;
+    }
+    .card p {
+      font-size: 1.08rem; color: #cceee9; font-weight: 500;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: var(--modal-bg);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1005; animation: fadeIn 0.3s;
+    }
+    .modal-overlay.active { display: flex; }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+    .modal-box {
+      background: var(--card-bg);
+      padding: 0 0 18px 0;
+      border-radius: 23px;
+      min-width: 340px; max-width: 700px; width: 99vw;
+      color: #eafaf9;
+      box-shadow: 0 0 52px #00ffc655, 0 0 0 2px var(--accent2) inset;
+      text-align: center;
+      position: relative;
+      animation: modalPop 0.36s cubic-bezier(.32,1.54,.56,.99);
+      display: flex; flex-direction: column; align-items: stretch;
+    }
+    @keyframes modalPop {
+      from { transform: scale(0.9); opacity: 0.2;}
+      to { transform: scale(1); opacity: 1;}
+    }
+
+    /* ---- TAB STYLES ---- */
+    .modal-tabs {
+      display: flex; justify-content: center; gap: 0;
+      margin: 0; border-bottom: 2px solid #182028;
+      padding: 0 20px 0 20px;
+      background: transparent;
+    }
+    .modal-tab {
+      flex: 1 1 0;
+      padding: 18px 0 12px 0;
+      background: none;
+      border: none;
+      color: #a7ffe8;
+      font-size: 1.18rem; font-weight: 700;
+      cursor: pointer;
+      transition: 
+        color 0.18s, 
+        box-shadow 0.2s, 
+        text-shadow 0.21s,
+        transform 0.17s;
+      border-top-left-radius: 22px; border-top-right-radius: 22px;
+      letter-spacing: 0.5px;
+      outline: none;
+      margin: 0 15px 0 0;
+      display: flex; align-items: center; gap: 9px;
+      background: transparent;
+      position: relative;
+    }
+    .modal-tab:last-child { margin-right: 0; }
+
+    .modal-tab svg, .modal-tab img, .modal-tab span.emoji {
+      font-size: 1.43em;
+      width: 27px; height: 27px;
+      margin-right: 5px;
+      vertical-align: middle;
+      transition: filter 0.23s, box-shadow 0.23s, transform 0.21s;
+    }
+    .modal-tab.active {
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent), 0 0 18px #00ffc669;
+      border-bottom: 3px solid var(--accent);
+      z-index: 2;
+    }
+    .modal-tab.active svg, .modal-tab.active img, .modal-tab.active .emoji {
+      filter: drop-shadow(0 0 6px var(--accent));
+      transform: scale(1.12);
+    }
+    .modal-tab:not(.active):hover, .modal-tab:not(.active):focus {
+      color: #fff;
+      text-shadow: 0 0 4px var(--accent2);
+    }
+    .modal-tab:not(.active):hover svg, 
+    .modal-tab:not(.active):hover img, 
+    .modal-tab:not(.active):hover .emoji {
+      filter: drop-shadow(0 0 6px var(--accent2));
+      transform: scale(1.09);
+    }
+    /* Remove dark highlight background on active tab */
+    .modal-tab.active {
+      background: transparent;
+    }
+
+    .modal-content {
+      padding: 28px 25px 8px 25px;
+      min-height: 280px;
+      max-height: 58vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 21px;
+    }
+    .modal-section-list {
+      display: flex; flex-direction: column; gap: 24px; width: 100%;
+    }
+    .modal-entry {
+      display: flex; align-items: flex-start; gap: 17px;
+      padding: 0 2px;
+      background: none;
+      border-radius: 12px;
+      min-height: 38px;
+      animation: entryFade 0.34s;
+    }
+    @keyframes entryFade { from {opacity: 0;transform: translateY(22px);} to {opacity:1;transform: none;} }
+    .modal-entry-icon {
+      width: 48px; height: 48px; border-radius: 13px;
+      background: #17232a;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 3px;
+      flex-shrink: 0;
+      font-size: 2.15rem; color: var(--accent2);
+      overflow: hidden;
+      border: 2px solid #29343f;
+    }
+    .modal-entry-icon img {
+      width: 80%; height: 80%; object-fit: contain; border-radius: 9px;
+      filter: drop-shadow(0 0 4px #00ffc678);
+    }
+    .modal-entry-main {
+      flex: 1; text-align: left;
+      display: flex; flex-direction: column;
+      gap: 2px;
+    }
+    .modal-entry-title {
+      font-size: 1.11rem; color: var(--accent); font-weight: bold;
+    }
+    .modal-entry-details {
+      font-size: 0.98rem; color: #eafaf9;
+    }
+    .modal-entry-date {
+      font-size: 0.91rem; color: #6dffe3;
+      margin-top: 2px; letter-spacing: 0.15px;
+    }
+    .modal-entry-bullets {
+      font-size: 0.97rem;
+      margin: 3px 0 0 0;
+      color: #b8e4dc;
+      padding-left: 1em;
+      list-style: disc;
+    }
+    @media (max-width: 900px) {
+      .modal-box { max-width: 99vw;}
+      .modal-content { max-height: 64vh; padding: 10px 3vw 8px 3vw;}
+      .modal-section-list { gap: 13px;}
+      .modal-entry-icon { width: 35px; height: 35px;}
+      .modal-tabs { padding: 0 5px;}
+      .modal-tab { font-size: 1.02rem; padding: 13px 2px 10px 2px;}
+    }
+    @media (max-width: 650px) {
+      .about-photo img { width: 100px; height: 100px;}
+      .about-cards { flex-direction: column; gap: 0;}
+      .card { margin: 7px auto; min-width: 0; }
+      .modal-box { padding: 0 0 5px 0;}
+      .modal-content { font-size: 0.99rem;}
+      .modal-tab { font-size: 0.93rem;}
+    }
+  </style>
+</head>
+<body>
+  <!-- LOADER (top of body, before content) -->
+  <div id="loaderBg">
+    <div id="aetherType"></div>
+  </div>
+
+
+
+  <!-- Home Button -->
+  <div class="back-button-top">
+    <a href="index.html" title="Back to Home">
+      <img src="back1.png" alt="Back">
+    </a>
+  </div>
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="about-photo">
+      <img src="people1.png" alt="Mil Verian">
+    </div>
+    <div class="about-text">
+      <h1>Meet Mil.</h1>
+      <p>
+        A Computer Science graduate passionate about front-end development, digital systems, and turning logic into something people can actually click.
+      </p>
+      <a href="Verian Ramil CV.pdf" download class="glow-btn"><span></span>Download CV / Resume</a>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="about-cards">
+    <div class="card" data-tab="academic">
+      <img src="assets/logo/acad1.png" alt="Academic">
+      <h3>Academic Journey</h3>
+      <p>Click to view details of my education background and achievements.</p>
+    </div>
+    <div class="card" data-tab="experience">
+      <img src="assets/logo/exp1.png" alt="Experience">
+      <h3>Professional Experience</h3>
+      <p>Click to view past jobs, roles, and industry exposure.</p>
+    </div>
+    <div class="card" data-tab="achievements">
+      <img src="assets/logo/ach1.png" alt="Achievements">
+      <h3>Recognitions & Milestones</h3>
+      <p>Click to see awards, leadership roles, and achievements.</p>
+    </div>
+  </section>
+
+  <!-- Modal/Popup -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <div class="modal-tabs">
+        <button class="modal-tab" data-tab="academic" id="tabAcademic">
+          <span class="emoji">🎓</span> Academic
+        </button>
+        <button class="modal-tab" data-tab="experience" id="tabExperience">
+          <span class="emoji">💼</span> Experience
+        </button>
+        <button class="modal-tab" data-tab="achievements" id="tabAchievements">
+          <span class="emoji">🏅</span> Milestones
+        </button>
+      </div>
+      <div class="modal-content" id="modalContentArea"></div>
+    </div>
+  </div>
+
+  <script>
+    // ---- MODAL DATA ----
+    const modalSections = {
+      academic: [
+        {
+          icon: '<img src="assets/logo/cvsu.png" alt="School">',
+          title: "Cavite State University – Main Campus",
+          date: "2019 – July 30, 2024",
+          details: "Bachelor of Science in Computer Science",
+        },
+        {
+          icon: '<img src="assets/logo/cvsu.png" alt="School">',
+          title: "Cavite State University – Main Campus",
+          date: "2018 – 2019",
+          details: "BS Industrial Technology Major in Electronics Technology",
+        },
+        {
+          icon: '<img src="assets/logo/uphsd.png" alt="School">',
+          title: "University of Perpetual Help System Dalta-Molino Campus",
+          date: "2016 – 2018",
+          details: "STEM Strand (Science, Technology, Engineering, Math)",
+        },
+      ],
+      experience: [
+        {
+          icon: '<img src="assets/logo/psc.webp" alt="PSC">',
+          title: "Screening and Validator (Job Order)",
+          date: "Philippine Sports Commission • Oct 2024 – Dec 2024",
+          bullets: [
+            "Screening & validation for Batang Pinoy athletes.",
+            "Guided participants, resolved concerns, ensured eligibility/compliance.",
+          ]
+        },
+        {
+          icon: '<img src="assets/logo/foundever.png" alt="Recruiter">',
+          title: "Recruiting Specialist",
+          date: "Foundever ATC Alabang • June 2024 – Sept 2024",
+          bullets: [
+            "Conducted initial interviews & assessments.",
+            "Managed recruitment support and applicant inquiries."
+          ]
+        },
+        {
+          icon: '<img src="assets/logo/ibex.png" alt="IBEX">',
+          title: "Agent-in Cust Svc 2",
+          date: "IBEX Global Solutions • Oct 2023 – Dec 2023",
+          bullets: [
+            "Handled multi-channel support, complaints, and customer inquiries.",
+            "Processed orders and maintained confidentiality."
+          ]
+        }
+      ],
+      achievements: [
+        {
+          icon: '<img src="assets/logo/ach1.png" alt="Award">',
+          title: "Gawad Durungan Top 8 – Computer Science",
+          date: "2021 – 2022",
+          details: "CS Student Org | GWA: 1.32"
+        },
+        {
+          icon: '<img src="assets/logo/ach1.png" alt="Award">',
+          title: "2nd Year Overall Ranking, Top 4 CS Org",
+          date: "2020 – 2021",
+          details: "GWA: 1.22"
+        },
+        {
+          icon: '<img src="assets/logo/ach1.png" alt="Scholar">',
+          title: "Scholar ng Bayan – Dasmariñas",
+          date: "2019 – 2023",
+          details: "City Scholarship Program"
+        },
+        // Extra-curricular
+        {
+          icon: '<img src="assets/logo/ach1.png" alt="Council">',
+          title: "Vice President for Operations & Implementation",
+          date: "2022 – 2023",
+          details: "CEIT Student Council"
+        },
+        {
+          icon: '<img src="assets/logo/ach1.png" alt="CEIT">',
+          title: "CEIT Member, Operation Committee",
+          date: "2018 – 2023",
+          details: "College of Engineering & IT"
+        }
+      ]
+    };
+
+    // ---- OPEN MODAL & TABS ----
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalContentArea = document.getElementById('modalContentArea');
+    const modalTabs = document.querySelectorAll('.modal-tab');
+    const cards = document.querySelectorAll('.card');
+    let currentTab = 'academic';
+
+    // Open modal for tab
+    function openModal(tab) {
+      setTab(tab);
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Tab switching
+    function setTab(tab) {
+      currentTab = tab;
+      modalTabs.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
+      // Render section content
+      renderModalSection(tab);
+    }
+
+    // Modal content builder
+    function renderModalSection(tab) {
+      const data = modalSections[tab];
+      if (!data) return;
+      modalContentArea.innerHTML = `<div class="modal-section-list">
+        ${data.map(entry => `
+          <div class="modal-entry">
+            <span class="modal-entry-icon">${entry.icon}</span>
+            <span class="modal-entry-main">
+              <span class="modal-entry-title">${entry.title || ''}</span>
+              <span class="modal-entry-date">${entry.date || ''}</span>
+              ${entry.details ? `<div class="modal-entry-details">${entry.details}</div>` : ''}
+              ${entry.bullets ? `<ul class="modal-entry-bullets">
+                ${entry.bullets.map(bullet => `<li>${bullet}</li>`).join('')}
+              </ul>` : ''}
+            </span>
+          </div>
+        `).join('')}
+      </div>`;
+    }
+
+    // Click card to open modal at correct tab
+    cards.forEach(card => {
+      card.addEventListener('click', () => openModal(card.dataset.tab));
+    });
+
+    // Tab switching
+    modalTabs.forEach(tabBtn => {
+      tabBtn.addEventListener('click', () => setTab(tabBtn.dataset.tab));
+    });
+
+    // Close modal (overlay, ESC)
+    modalOverlay.onclick = (e) => { if (e.target === modalOverlay) closeModal(); };
+    document.addEventListener('keydown', e => { if (modalOverlay.classList.contains('active') && e.key === 'Escape') closeModal(); });
+
+    // Initial: set default tab
+    setTab('academic');
+  </script>
+  <script src="loader.js"></script>
+
+
+
+</body>
+</html>

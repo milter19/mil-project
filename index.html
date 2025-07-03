@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mil Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="loader.css">
+</head>
+<body>
+<!-- LOADER (top of body, before content) -->
+  <div id="loaderBg">
+    <div id="aetherType"></div>
+  </div>
+
+  <!-- NAVBAR + HERO -->
+  <div class="hero">
+    <nav class="navbar">
+      <div class="logo">AETHER</div>
+      <ul>
+        <li><a href="aboutme.html">About Me</a></li>
+        <li><a href="gamingjourney.html">Gaming Journey</a></li>
+        <li><a href="project.html">Projects</a></li>
+        <li><a href="#contact" class="contact-btn">Contact Info</a></li>
+      </ul>
+    </nav>
+    <div class="hero-content">
+      <div class="hero-pic-glow">
+        <img src="people1.png" alt="Mil Profile Picture" class="hero-pic">
+      </div>
+      <h1 class="hero-title">RAMIL VERIAN</h1>
+      <p class="hero-subtitle">
+        Front-End Developer (Beginner) | Game Enthusiast | Computer Science Graduate
+      </p>
+      <a href="Verian Ramil CV.pdf" class="resume-btn"><span></span>Download CV / Resume</a>
+    </div>
+    <div class="scroll-arrow">
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
+
+  <!-- ABOUT + SKILLS SECTION (joined, separate from hero) -->
+  <section class="about-skills-section" id="skills">
+    <div class="about-skills-wrapper">
+      <!-- ABOUT TEASER -->
+      <div class="aboutme-teaser">
+        <img src="people1.png" class="aboutme-teaser-pic" alt="Mil">
+        <div class="aboutme-teaser-content">
+          <h2>About Me</h2>
+          <p>
+            Hi! I'm <b>Mil</b>, a Computer Science graduate with a passion for creative technology and digital solutions.
+            <br>I'm always learning, building, and pushing my skills forward.<br>
+            This is a quick peek at my current skill set and favorite tools.
+          </p>
+          <a href="aboutme.html" class="view-more-btn">View More</a>
+        </div>
+      </div>
+
+      <!-- SKILL SET & TOOLS -->
+      <div class="skills-section-inline">
+        <h2 class="skills-title"><i class="fa-solid fa-screwdriver-wrench"></i> Skill Set &amp; Tools</h2>
+        <div class="skills-grid">
+          <!-- PRODUCTIVITY -->
+          <div class="skills-card" data-skill="productivity">
+            <div class="skills-icon"><i class="fa-solid fa-briefcase"></i></div>
+            <span>Productivity Tools</span>
+          </div>
+          <!-- PROGRAMMING -->
+          <div class="skills-card" data-skill="programming">
+            <div class="skills-icon"><i class="fa-solid fa-code"></i></div>
+            <span>Programming<br>Languages</span>
+          </div>
+          <!-- MEDIA -->
+          <div class="skills-card" data-skill="media">
+            <div class="skills-icon"><i class="fa-solid fa-photo-film"></i></div>
+            <span>Media &amp; Editing<br>Tools</span>
+          </div>
+          <!-- IDEs -->
+          <div class="skills-card" data-skill="ides">
+            <div class="skills-icon"><i class="fa-solid fa-terminal"></i></div>
+            <span>IDEs &amp; Platforms</span>
+          </div>
+          <!-- VERSION CONTROL -->
+          <div class="skills-card" data-skill="version">
+            <div class="skills-icon"><i class="fa-brands fa-git-alt"></i></div>
+            <span>Version Control</span>
+          </div>
+          <!-- COLLAB TOOLS -->
+          <div class="skills-card" data-skill="collab">
+            <div class="skills-icon"><i class="fa-solid fa-users"></i></div>
+            <span>Collaboration<br>Tools</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </br> </br>
+    <p class="skills-note subtle-note">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>All skills marked as <b>50%</b> are considered <b>Beginner</b> level by default.</span>
+    </p>
+
+  </section>
+
+  
+
+  <!-- POPUP/MODAL SKILL DETAILS -->
+  <div class="modal-bg" id="skillsModal">
+    <div class="modal-content" id="modalContent">
+      <button id="closeModal" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <div id="modalSkillsContent"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-modern" id="contact">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">AETHER</div>
+        <p class="footer-desc">
+          Passionate about creative tech and digital solutions.<br>
+          Portfolio by <strong>Mil (Ramil Verian)</strong>.<br>
+          <span class="footer-location">Arca South, Taguig City</span><br>
+          <span class="footer-location">Dasmariñas, Cavite</span>
+        </p>
+      </div>
+      <div class="footer-links-group">
+        <div>
+          <h4>SOCIALS</h4>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/ramil-verian-733166296/"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/gigamil/?hl=en"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:ramilverian@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>CONTACT</h4>
+          <ul>
+            <li><strong>Email:</strong> ramilverian@gmail.com</li>
+            <li><strong>Contact #:</strong> To be requested</li>
+          </ul>
+        </div>
+        <div>
+          <h4>VALUES</h4>
+          <ul>
+            <li>Growth</li>
+            <li>Integrity</li>
+            <li>Resilience</li>
+            <li>Learning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Ramil Verian. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="loader.js"></script>
+  <script>
+    // Smooth scroll for navbar Contact Info
+    document.querySelectorAll('a.contact-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const target = document.getElementById('contact');
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+
+
+
+</body>
+</html>

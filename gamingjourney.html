@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Gaming Journey</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="loader.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    :root {
+      --main-bg: #0a1017;
+      --hero-glow: #00ffc6;
+      --accent: #00ffc6;
+      --accent2: #34c9ef;
+      --glass-bg: rgba(16, 28, 34, 0.93);
+      --card-shadow: 0 6px 32px #00ffc612;
+      --glass-blur: blur(9px);
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--main-bg);
+      color: #e6f7f7;
+      min-height: 100vh;
+    }
+    .back-button-top {
+      position: fixed;
+      top: 28px; left: 34px;
+      z-index: 23;
+      background: #181f22;
+      border-radius: 50%;
+      box-shadow: 0 2px 18px #00ffc61a;
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      transition: box-shadow 0.22s, background 0.2s;
+    }
+    .back-button-top:hover {
+      box-shadow: 0 2px 32px #00ffc650;
+      background: #11171d;
+    }
+    .back-button-top img {
+      width: 33px; height: 33px; display: block;
+      filter: drop-shadow(0 0 6px #00ffc6b9);
+      transition: transform 0.17s;
+    }
+    .back-button-top:hover img { transform: scale(1.09); }
+    .gaming-hero {
+      position: relative;
+      height: 60vh;
+      min-height: 320px;
+      background: 
+        linear-gradient(120deg, rgba(16, 32, 44, 0.96) 60%, rgba(32,44,65,0.56) 120%),
+        url('scarboy.gif') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 85px 10% 36px 10%;
+      color: #fff;
+      overflow: hidden;
+      box-shadow: 0 10px 44px #00ffc616;
+    }
+    .hero-lights {
+      position: absolute;
+      left: 0; top: 0; width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      left: 40vw; top: 13vh;
+      width: 560px; height: 170px;
+      background: radial-gradient(ellipse at center, #00ffc64b 0%, #34c9ef1a 80%, transparent 100%);
+      opacity: 0.74; filter: blur(24px);
+      animation: glowMove 6s ease-in-out infinite alternate;
+    }
+    @keyframes glowMove {
+      from { left: 32vw; top: 8vh; opacity: 0.76; }
+      to   { left: 55vw; top: 19vh; opacity: 0.46; }
+    }
+    .gaming-hero h1 {
+      font-size: 3.3rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 28px #00ffc630, 0 2px 10px #141c20;
+      animation: popInTitle 1.3s cubic-bezier(.4,1.6,.67,0.95);
+    }
+    @keyframes popInTitle {
+      from { opacity: 0; transform: translateY(-30px) scale(0.92);}
+      to { opacity: 1; transform: none;}
+    }
+    .gaming-hero h1:after {
+      content: "";
+      display: block;
+      margin: 13px 0 0 0;
+      width: 95px; height: 4px;
+      border-radius: 2.5px;
+      background: linear-gradient(90deg, #00ffc6 60%, #34c9ef 100%);
+      box-shadow: 0 4px 15px #00ffc640;
+      animation: underlineGlow 2.4s infinite alternate;
+    }
+    @keyframes underlineGlow {
+      from { box-shadow: 0 4px 15px #00ffc640;}
+      to { box-shadow: 0 4px 36px #34c9ef80;}
+    }
+    .gaming-hero p {
+      font-size: 1.3rem;
+      color: #ccfff9;
+      max-width: 690px;
+      margin-top: 5px;
+      letter-spacing: 0.7px;
+      position: relative;
+      z-index: 2;
+      animation: subtitleFade 1.9s cubic-bezier(.34,1.4,.56,0.9);
+      background: linear-gradient(90deg, #00ffc6 0%, #34c9ef 70%, #eafaf9 100%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: moveGradient 8s linear infinite alternate;
+    }
+    @keyframes moveGradient {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    @keyframes subtitleFade {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: none;}
+    }
+    .game-gallery {
+      background: var(--main-bg);
+      padding: 68px 10% 48px 10%;
+      color: #fff;
+    }
+    .game-gallery h2 {
+      font-size: 2.2rem;
+      margin-bottom: 34px;
+      color: var(--accent);
+      letter-spacing: 1.2px;
+      font-weight: 800;
+      text-shadow: 0 2px 10px #00ffc62a;
+      animation: fadeIn 1.1s;
+    }
+    @keyframes fadeIn {
+      from {opacity:0; transform: translateY(25px);}
+      to {opacity:1;}
+    }
+    .game-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+      gap: 33px;
+      justify-content: center;
+      align-items: stretch;
+      margin-bottom: 12px;
+    }
+    .game-item {
+      background: var(--glass-bg);
+      border-radius: 15px;
+      box-shadow: var(--card-shadow), 0 0 14px #00ffc612;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+      transition: transform 0.32s cubic-bezier(.45,1.53,.56,0.9), box-shadow 0.24s;
+      animation: cardPop 0.7s cubic-bezier(.21,1.32,.47,1.01);
+      border: 2.5px solid transparent;
+      backdrop-filter: var(--glass-blur);
+    }
+    @keyframes cardPop {
+      from { opacity:0; transform: scale(0.92) translateY(28px);}
+      to { opacity:1; transform: none;}
+    }
+    .game-item:hover, .game-item:focus {
+      transform: translateY(-11px) scale(1.07) rotate(-1.2deg);
+      box-shadow: 0 10px 30px #00ffc648, 0 0 0 5px #00ffc62b;
+      border: 2.5px solid var(--accent2);
+      z-index: 3;
+    }
+    .game-item img {
+      width: 100%; height: 165px;
+      object-fit: cover;
+      filter: brightness(0.98);
+      border-top-left-radius: 13px; border-top-right-radius: 13px;
+      transition: filter 0.17s;
+    }
+    .game-item:hover img {
+      filter: brightness(1.16) saturate(1.1);
+    }
+    .game-fav-badge {
+      position: absolute;
+      top: 10px; left: 10px;
+      background: linear-gradient(120deg, #00ffc6 60%, #34c9ef 100%);
+      color: #181c21;
+      padding: 4px 16px;
+      font-size: 0.98rem;
+      font-weight: bold;
+      border-radius: 8px 14px 10px 8px;
+      box-shadow: 0 1px 7px #00ffc630;
+      letter-spacing: 1px;
+      z-index: 10;
+      animation: badgePulse 1.9s infinite alternate;
+    }
+    @keyframes badgePulse {
+      from { box-shadow: 0 1px 7px #00ffc630;}
+      to   { box-shadow: 0 2px 18px #00ffc670;}
+    }
+    .game-item h3 {
+      font-size: 1.18rem;
+      margin: 14px 0 3px 0;
+      color: var(--accent2);
+      font-weight: 800;
+      text-shadow: 0 1px 10px #00ffc634;
+      transition: color 0.16s;
+    }
+    .game-item:hover h3 { color: #fff;}
+    .game-genre {
+      font-size: 0.98rem;
+      color: #b8e4dc;
+      margin-bottom: 14px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.27s, transform 0.25s;
+      background: linear-gradient(90deg, #00ffc6 60%, #34c9ef 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .game-item:hover .game-genre,
+    .game-item:focus .game-genre {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .load-more-container {
+      text-align: center;
+      margin-top: 38px;
+    }
+    .load-more-btn {
+      padding: 13px 35px;
+      font-size: 1.16rem;
+      border-radius: 25px;
+      border: 2.5px solid var(--accent);
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      transition: box-shadow 0.21s, color 0.18s, background 0.22s;
+      font-weight: 700;
+      margin: 10px;
+      box-shadow: 0 2px 18px #00ffc629;
+      letter-spacing: 1.2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .load-more-btn:after {
+      content: '';
+      position: absolute; left: 0; bottom: 0;
+      width: 0; height: 100%;
+      background: linear-gradient(90deg, #00ffc6 60%, #34c9ef 100%);
+      z-index: -1;
+      border-radius: 25px;
+      transition: width 0.35s cubic-bezier(.4,1.1,.48,1);
+    }
+    .load-more-btn:hover,
+    .load-more-btn:focus {
+      color: #181f1e;
+      background: #00ffc6;
+      border-color: #00ffc6;
+      box-shadow: 0 2px 25px #00ffc655;
+    }
+    .load-more-btn:hover:after,
+    .load-more-btn:focus:after {
+      width: 100%;
+    }
+    .game-news {
+      background: #12171f;
+      padding: 64px 10% 50px 10%;
+      color: #fff;
+      box-shadow: 0 0 60px #00ffc608 inset;
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 42px;
+      margin-bottom: 22px;
+    }
+    .carousel-banner {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      height: 350px;
+      box-shadow: 0 0 34px #00ffc614;
+      background: #101a24;
+    }
+    .carousel-banner img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0; left: 0;
+      opacity: 0;
+      transition: opacity 1s cubic-bezier(.32,1.34,.47,1.01);
+      border-radius: 18px;
+      filter: brightness(0.96) drop-shadow(0 0 38px #00ffc629);
+    }
+    .carousel-banner img.active {
+      opacity: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .carousel-banner:hover .carousel-controls {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .carousel-controls button {
+      background: linear-gradient(120deg, #181e26cc 60%, #00ffc640 100%);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 8px 17px;
+      border-radius: 50%;
+      transition: background 0.2s, color 0.22s, box-shadow 0.22s;
+      box-shadow: 0 1px 6px #00ffc625;
+      margin: 0 8px;
+    }
+    .carousel-controls button:hover {
+      background: #00ffc6;
+      color: #181f22;
+      box-shadow: 0 2px 14px #00ffc671;
+    }
+    .news-ad img, .news-ad video {
+      width: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+    .news-ad {
+      width: 100%; height: 100%;
+      min-width: 180px; min-height: 260px;
+      background: #151d22;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 0 16px #00ffc61a;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .news-description {
+      text-align: left;
+      margin-bottom: 54px;
+    }
+    .news-description h2 {
+      color: var(--accent);
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      font-weight: 900;
+      text-shadow: 0 2px 9px #00ffc62c;
+    }
+    .news-description p {
+      color: #ccfffd;
+      font-size: 1.09rem;
+      max-width: 800px;
+    }
+    .news-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 23px;
+    }
+    .news-card {
+      background: var(--glass-bg);
+      padding: 22px;
+      border-radius: 13px;
+      box-shadow: 0 0 15px #00ffc619;
+      border-left: 5px solid var(--accent2);
+      transition: box-shadow 0.19s, transform 0.16s;
+      position: relative;
+      overflow: hidden;
+      min-height: 110px;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .news-card:before {
+      content: '';
+      position: absolute; left: 0; top: 0; width: 0; height: 100%;
+      background: linear-gradient(120deg, #00ffc650 60%, #34c9ef30 100%);
+      transition: width 0.18s;
+      z-index: 1;
+      border-radius: 0 11px 11px 0;
+    }
+    .news-card:hover:before {
+      width: 100%;
+    }
+    .news-card:hover, .news-card:focus {
+      box-shadow: 0 0 24px #00ffc66c;
+      border-left: 5px solid var(--accent);
+      transform: scale(1.025);
+      z-index: 2;
+    }
+    .news-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 7px;
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      z-index: 2;
+    }
+    .news-card p {
+      font-size: 1.01rem;
+      color: #eafaf9;
+      z-index: 2;
+    }
+    .news-card .news-badge {
+      position: absolute;
+      top: 12px; right: 17px;
+      font-size: 1.32rem;
+      color: #34c9ef;
+      opacity: 0.89;
+      filter: drop-shadow(0 1px 8px #00ffc660);
+      z-index: 4;
+    }
+    @media (max-width: 1150px) {
+      .game-list, .news-grid, .news-cards { grid-template-columns: 1fr 1fr;}
+    }
+    @media (max-width: 850px) {
+      .game-list, .news-grid, .news-cards { grid-template-columns: 1fr;}
+      .game-list, .news-cards { gap: 18px; }
+      .news-grid { gap: 18px;}
+      .gaming-hero { padding: 60px 5vw 32px 5vw; }
+    }
+    @media (max-width: 600px) {
+      .gaming-hero { padding: 38px 2vw 18px 2vw; }
+      .game-gallery { padding: 38px 3vw 28px 3vw;}
+      .news-grid, .news-cards { gap: 7px;}
+      .game-item img { height: 115px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- LOADER (top of body, before content) -->
+  <div id="loaderBg">
+    <div id="aetherType"></div>
+  </div>
+
+  <div class="back-button-top">
+    <a href="index.html"><img src="back1.png" alt="Back to Home"></a>
+  </div>
+  <section class="gaming-hero">
+    <div class="hero-lights">
+      <div class="hero-glow"></div>
+    </div>
+    <h1>Gaming Journey</h1>
+    <p>Where stories were forged & boss fights conquered.</p>
+  </section>
+
+  <section class="game-gallery">
+    <h2>Epic Quest: The Gaming Archive</h2>
+    <div class="game-list" id="gameList"></div>
+    <div class="load-more-container">
+      <button class="load-more-btn" id="loadMoreBtn">Load More</button>
+    </div>
+  </section>
+
+  <section class="game-news">
+    <div class="news-grid">
+      <div class="carousel-banner">
+        <div class="carousel-controls">
+          <button onclick="prevBanner()">&#10094;</button>
+          <button onclick="nextBanner()">&#10095;</button>
+        </div>
+        <img src="assets/banner/skirk.png" class="active" alt="Slide 1">
+        <img src="assets/banner/carte.jpg" alt="Slide 2">
+        <img src="assets/banner/sunday.jfif" alt="Slide 3">
+        <img src="assets/banner/rover.jpg" alt="Slide 4">
+        <img src="assets/banner/phainon.jfif" alt="Slide 5">
+      </div>
+      <div class="news-ad">
+        <video width="100%" height="100%" autoplay muted loop playsinline>
+          <source src="assets/banner/advert1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+    <div class="news-description">
+      <h2>Stay Updated</h2>
+      <p>Stay up-to-date with the latest progress and updates on my portfolio project. Here, I regularly share improvements, new features, and insights on the development process as I continue to enhance both the design and functionality of this site.</p>
+    </div>
+    <div class="news-cards">
+      <div class="news-card">
+        <div class="news-badge">🛠️</div>
+        <h3>Update 1.1 Patch Notes</h3>
+        <p>This update features a modern, tech-inspired design upgrade and enhanced pop-ups/modals for a more professional look. I also added a dedicated Gaming Journey page and exclusive sections for “About Me” and my project showcases.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-badge">⏳</div>
+        <h3>Upcoming Updates</h3>
+        <p>Expect new content across both current and upcoming pages, along with experience enhancements. I’m also working on making the site even more interactive and engaging for visitors.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-badge">💡</div>
+        <h3>Dev Insight</h3>
+        <p>I regularly share my development process, the creative choices I make, and the technical challenges I face as I build and expand this portfolio. Each update is an opportunity for growth and continuous learning as I strive to deliver a better user experience.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-badge">🎮</div>
+        <h3>Profile Goal</h3>
+        <p>My goal is to become a reliable front-end developer and to eventually build my biggest dream project which is to create a full open-world RPG game similar to Genshin Impact or Wuthering Waves. This portfolio serves as my foundation as I work towards that vision.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // --- Game Gallery (Adventure Log) ---
+    const games = [
+      { src: "assets/games/mlbb.png", title: "Mobile Legends", genre: "MOBA / Mobile", favorite: true },
+      { src: "assets/games/wuthering-waves.png", title: "Wuthering Waves", genre: "ARPG / Gacha", favorite: true },
+      { src: "assets/games/genshin-impact.png", title: "Genshin Impact", genre: "Adventure / RPG", favorite: true },
+      { src: "assets/games/honkai-starrail.png", title: "Honkai: Starrail", genre: "Turn-Based / RPG" },
+      { src: "assets/games/nu-carnival.png", title: "NU: Carnival", genre: "Fantasy / Adult" },
+      { src: "assets/games/etheria-restart.png", title: "Etheria: Restart", genre: "Sci-fi / Strategy" },
+      { src: "assets/games/reverse-1999.png", title: "Reverse: 1999", genre: "Time Travel / Visual" },
+      { src: "assets/games/haunted-dorm.png", title: "Haunted Dorm", genre: "Casual / Horror" },
+      { src: "assets/games/love-and-deepspace.jpeg", title: "Love and Deepspace", genre: "Dating / Sci-Fi" },
+      { src: "assets/games/solo-leveling.png", title: "Solo Leveling", genre: "Action / RPG" },
+      { src: "assets/games/morimens.png", title: "Morimens", genre: "Fantasy / Idle" },
+      { src: "assets/games/crystal-atlan.png", title: "Crystal of Atlan", genre: "Magic / Dungeon" },
+      { src: "assets/games/black-beacon.png", title: "Black Beacon", genre: "Adventure / Strategy" },
+      { src: "assets/games/plants-vs-zombies.png", title: "Plants vs. Zombies", genre: "Tower Defense / Classic" },
+      { src: "assets/games/dark-war.png", title: "Dark War Survival", genre: "Survival / Shooter" },
+      { src: "assets/games/tower-god.png", title: "Tower of God", genre: "Anime / Strategy" },
+      { src: "assets/games/tower-fantasy.png", title: "Tower of Fantasy", genre: "MMORPG / Open World" },
+      { src: "assets/games/wild-rift.png", title: "Wild Rift", genre: "MOBA / Competitive" },
+      { src: "assets/games/honor-kings.png", title: "Honor of Kings", genre: "MOBA / Mobile" }
+    ];
+
+    const gameList = document.getElementById("gameList");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    let expanded = false;
+
+    function renderGames() {
+      let limit = expanded ? games.length : 6;
+      gameList.innerHTML = games.map((game, i) =>
+        i < limit ? `
+        <div class="game-item">
+          ${game.favorite ? `<div class="game-fav-badge">★ FAVE</div>` : ''}
+          <img src="${game.src}" alt="${game.title}">
+          <h3>${game.title}</h3>
+          <div class="game-genre">${game.genre}</div>
+        </div>
+        ` : ''
+      ).join("");
+      loadMoreBtn.textContent = expanded ? "Show Less" : "Load More";
+    }
+
+    loadMoreBtn.onclick = function() {
+      expanded = !expanded;
+      renderGames();
+    };
+
+    renderGames();
+
+    // --- Carousel News Banner ---
+    const bannerImages = document.querySelectorAll(".carousel-banner img");
+    let bannerIndex = 0;
+    function showBanner(index) {
+      bannerImages.forEach((img, i) => img.classList.remove("active"));
+      bannerImages[index].classList.add("active");
+    }
+    function nextBanner() {
+      bannerIndex = (bannerIndex + 1) % bannerImages.length;
+      showBanner(bannerIndex);
+    }
+    function prevBanner() {
+      bannerIndex = (bannerIndex - 1 + bannerImages.length) % bannerImages.length;
+      showBanner(bannerIndex);
+    }
+    setInterval(nextBanner, 4300);
+  </script>
+  <script src="loader.js"></script>
+
+
+
+</body>
+</html>
