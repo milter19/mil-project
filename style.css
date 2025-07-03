@@ -49,6 +49,7 @@ body {
   box-shadow: 0 0 10px #00ffc690;
 }
 
+/* Default desktop - no change needed */
 .navbar ul {
   display: flex;
   gap: 24px;
@@ -58,37 +59,55 @@ body {
   padding-left: 0;
   margin: 0;
   transition: all 0.2s;
+  overflow: visible;
+  width: auto;
+  flex-wrap: nowrap;
 }
 
-/* MOBILE STACKED NAVBAR */
+/* Scrollable navbar on mobile */
 @media (max-width: 700px) {
   .navbar ul {
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 98vw;
+    gap: 8px;
     background: #181e27ee;
-    border-radius: 1em;
-    padding: 18px 0;
+    border-radius: 0.8em;
+    padding: 10px 0 10px 8px;
     box-shadow: 0 4px 16px #0003;
-    width: 96vw;
-    margin: 0 auto;
+    scrollbar-width: thin;
+    scrollbar-color: #232f40 #232f4000;
   }
   .navbar ul li {
-    width: 90vw;
+    min-width: 110px;
+    flex: 0 0 auto;
     text-align: center;
-    border-bottom: 1px solid #232f4055;
-    padding: 8px 0;
-  }
-  .navbar ul li:last-child {
-    border-bottom: none;
   }
   .navbar ul li a {
-    font-size: 1.12em;
+    font-size: 1.08em;
     letter-spacing: 0.03em;
-    padding: 12px 0;
+    padding: 10px 0;
     display: block;
+    border-radius: 0.6em;
+    background: none;
+    transition: background 0.2s;
+  }
+  .navbar ul li a:active, .navbar ul li a:focus {
+    background: #232f4055;
+  }
+  /* Optional: Hide ugly scrollbars on Webkit browsers */
+  .navbar ul::-webkit-scrollbar {
+    height: 6px;
+    background: transparent;
+  }
+  .navbar ul::-webkit-scrollbar-thumb {
+    background: #232f4070;
+    border-radius: 3px;
   }
 }
+
 
 
 
